@@ -1,0 +1,1 @@
+public class Nodo { Cliente dato; Nodo siguiente; public Nodo(Cliente d){dato=d;} }

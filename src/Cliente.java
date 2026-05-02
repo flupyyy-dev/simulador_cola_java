@@ -1,0 +1,1 @@
+public class Cliente { String id,nombre,servicio; public Cliente(String id,String nombre,String servicio){this.id=id;this.nombre=nombre;this.servicio=servicio;} public String toString(){return id+" - "+nombre+" ("+servicio+")";} }
