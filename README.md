@@ -79,6 +79,6 @@ java -cp src Simulador
 ## Datos
 
 * Proyecto del Estructuras de Datos.
-* DESCRIPCIÓN COMPLETA EN EL ARCHIVO ADJUNTO
+* Proyecto #1 Colas y Pilas
 * Dylan Odair Paz Navas (202503824)
 * Universidad Da Vinci de Guatemala
