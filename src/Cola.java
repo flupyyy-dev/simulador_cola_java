@@ -1,1 +1,49 @@
-public class Cola { private Nodo f,fi; public boolean estaVacia(){return f==null;} public void encolar(Cliente c){Nodo n=new Nodo(c); if(estaVacia())f=fi=n; else{fi.siguiente=n;fi=n;}} public Cliente desencolar(){ if(estaVacia())return null; Cliente c=f.dato; f=f.siguiente; if(f==null)fi=null; return c;} public void mostrar(){ if(estaVacia()){System.out.println("Cola vacía");return;} Nodo a=f; while(a!=null){System.out.println(a.dato);a=a.siguiente;} } }
+public class Cola {
+
+    private Nodo frente;
+    private Nodo fin;
+
+    // Verifica si la cola está vacía
+    public boolean estaVacia() {
+        return frente == null;
+    }
+
+    // Agrega un cliente al final de la cola
+    public void encolar(Cliente cliente) {
+        Nodo nuevo = new Nodo(cliente);
+
+        if (estaVacia()) {
+            frente = fin = nuevo;
+        } else {
+            fin.siguiente = nuevo;
+            fin = nuevo;
+        }
+    }
+
+    // Elimina el primer cliente de la cola (FIFO)
+    public Cliente desencolar() {
+        if (estaVacia()) return null;
+
+        Cliente cliente = frente.dato;
+        frente = frente.siguiente;
+
+        if (frente == null) fin = null;
+
+        return cliente;
+    }
+
+    // Muestra todos los clientes en la cola
+    public void mostrar() {
+        Nodo actual = frente;
+
+        if (actual == null) {
+            System.out.println("Cola vacía.");
+            return;
+        }
+
+        while (actual != null) {
+            System.out.println(actual.dato);
+            actual = actual.siguiente;
+        }
+    }
+}
