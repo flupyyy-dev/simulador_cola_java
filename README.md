@@ -76,6 +76,9 @@ java -cp src Simulador
 
 ---
 
-## Nota
+## Datos
 
-Proyecto hecho para el curso de Estructuras de Datos.
+Proyecto del Estructuras de Datos.
+DESCRIPCIÓN COMPLETA EN EL ARCHIVO ADJUNTO
+Dylan Odair Paz Navas (202503824)
+Universidad Da Vinci de Guatemala
