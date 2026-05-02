@@ -1,1 +1,114 @@
-import java.util.*;import java.io.*;public class Simulador{ static void cargar(Cola cola){try(BufferedReader br=new BufferedReader(new FileReader("data/clientes.txt"))){String l;while((l=br.readLine())!=null){String[]p=l.split(",");cola.encolar(new Cliente(p[0],p[1],p[2]));}System.out.println("Clientes cargados");}catch(Exception e){System.out.println("Error:"+e.getMessage());}} static int leer(Scanner sc){while(!sc.hasNextInt()){System.out.println("Número inválido");sc.next();}return sc.nextInt();} public static void main(String[]a){Cola cola=new Cola();Pila h=new Pila();Scanner sc=new Scanner(System.in);cargar(cola);int op;do{System.out.println("\n1.Agregar 2.Atender 3.Cola 4.Historial 5.Ultimo 6.Salir");op=leer(sc);sc.nextLine();switch(op){case 1:System.out.print("ID:");String id=sc.nextLine();System.out.print("Nombre:");String n=sc.nextLine();System.out.print("Servicio:");String s=sc.nextLine();cola.encolar(new Cliente(id,n,s));break;case 2:Cliente c=cola.desencolar();if(c!=null){h.push(c);System.out.println("Atendido:"+c);}else System.out.println("Cola vacía");break;case 3:cola.mostrar();break;case 4:h.mostrar();break;case 5:System.out.println("Último:"+h.peek());break;}}while(op!=6);} }
+import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.FileReader;
+
+// Clase principal con el menú del sistema
+public class Simulador {
+
+    // Carga clientes desde el archivo y los encola
+    public static void cargarArchivo(Cola cola) {
+        try (BufferedReader br = new BufferedReader(new FileReader("data/clientes.txt"))) {
+
+            String linea;
+
+            while ((linea = br.readLine()) != null) {
+                String[] partes = linea.split(",");
+
+                Cliente cliente = new Cliente(
+                        partes[0],
+                        partes[1],
+                        partes[2]
+                );
+
+                cola.encolar(cliente);
+            }
+
+            System.out.println("Clientes cargados correctamente.");
+
+        } catch (Exception e) {
+            System.out.println("Error al leer archivo: " + e.getMessage());
+        }
+    }
+
+    // Método para validar entrada numérica
+    public static int leerEntero(Scanner sc) {
+        while (!sc.hasNextInt()) {
+            System.out.println("Ingrese un número válido.");
+            sc.next();
+        }
+        return sc.nextInt();
+    }
+
+    public static void main(String[] args) {
+
+        Cola cola = new Cola();
+        Pila historial = new Pila();
+        Scanner sc = new Scanner(System.in);
+
+        // Cargar clientes automáticamente al iniciar
+        cargarArchivo(cola);
+
+        int opcion;
+
+        do {
+            System.out.println("\n--- MENU ---");
+            System.out.println("1. Agregar cliente");
+            System.out.println("2. Atender cliente");
+            System.out.println("3. Ver cola");
+            System.out.println("4. Ver historial");
+            System.out.println("5. Último atendido");
+            System.out.println("6. Salir");
+
+            opcion = leerEntero(sc);
+            sc.nextLine();
+
+            switch (opcion) {
+
+                case 1:
+                    System.out.print("ID: ");
+                    String id = sc.nextLine();
+
+                    System.out.print("Nombre: ");
+                    String nombre = sc.nextLine();
+
+                    System.out.print("Servicio: ");
+                    String servicio = sc.nextLine();
+
+                    cola.encolar(new Cliente(id, nombre, servicio));
+                    break;
+
+                case 2:
+                    Cliente atendido = cola.desencolar();
+
+                    if (atendido != null) {
+                        historial.push(atendido);
+                        System.out.println("Atendido: " + atendido);
+                    } else {
+                        System.out.println("Cola vacía.");
+                    }
+                    break;
+
+                case 3:
+                    cola.mostrar();
+                    break;
+
+                case 4:
+                    historial.mostrar();
+                    break;
+
+                case 5:
+                    Cliente ultimo = historial.peek();
+                    if (ultimo != null) {
+                        System.out.println("Último atendido: " + ultimo);
+                    } else {
+                        System.out.println("No hay historial.");
+                    }
+                    break;
+
+            }
+
+        } while (opcion != 6);
+
+        sc.close();
+    }
+}
